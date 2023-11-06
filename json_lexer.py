@@ -35,17 +35,3 @@ def t_error(t):
     t.lexer.skip(1)
 
 lexer = lex.lex()
-
-# Sample input for testing
-sample_input = '''
-{
-    "name": "John",
-    "age": 30,
-    "isMarried":true
-}
-'''
-
-# Test the lexer with the sample input
-#lexer.input(sample_input)
-#for token in lexer:
-   # print(f"Token: {token.type}, Value: {token.value}")
