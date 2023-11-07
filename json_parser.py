@@ -59,13 +59,14 @@ def parse_object(tokens):
 def parse_array(tokens):
     # Initialize an empty list to represent the JSON array
     arr = []
-
+    
     # Get the first token from input
     token = next(tokens, None)
 
+    print("array entered "+token.type)
+    
     print("stop 1 " + token.type)
 
-    # TODO Allow multiple types of values in array
     # TODO Error if no comma
     # TODO Incorporate rest of function
 
@@ -73,17 +74,26 @@ def parse_array(tokens):
         return arr  # Return an empty array if the array is empty
 
     while token:
-        if token.type == 'STRING':
-            print(token)
-            value = token.value.strip('"')
+        if token.type != None :
+            # Pass the current token to parse_value for parsing
+
+            if token.type == 'COMMA':
+                token = next(tokens, None)
+                if token.type == 'RBRACKET':
+                    raise ValueError("Object expected to follow after ','")
+
+            value = parse_value(iter([token]))  # Pass the token in an iterator
+
+            # Append the parsed value to the array
             arr.append(value)
+
         token = next(tokens, None)
 
         if token is None:
             raise ValueError("Expected ']' in array")
 
         if token.type == 'RBRACKET':
-            print(token)
+            print("Array End")
             return arr  # Return the array when ']' is encountered
         
         
@@ -157,6 +167,7 @@ def parse_value(tokens):
     
     # If the token is a left square bracket '[', parse an array
     if token.type == 'LBRACKET':
+        print("Array found")
         return parse_array(tokens)
     
     # If none of the expected token types are found, raise an error
