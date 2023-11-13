@@ -1,29 +1,6 @@
 from json_parser import parse_value
 from json_lexer import lexer
-
-# Example JSON input
-json_input = '''
-[{
-    "name": "John",
-    "age": 30,
-    "isMarried": true,
-    "cars":[1, "A", "3"],
-    "salary":1000,
-    "object":{
-    "test":true
-    }
-},
-{
-    "name": "Sam",
-    "age": 40,
-    "isMarried": true,
-    "cars":[1, "A", "3"],
-    "salary":1000,
-    "object":{
-    "test":false
-    }
-}]
-'''
+from dummy_json import json_input
 
 # Create a generator of tokens using the lexer (json_lexer.tokens)
 
